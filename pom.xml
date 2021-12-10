@@ -10,21 +10,9 @@
     <groupId>org.example</groupId>
     <artifactId>flink-statistics</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>flink-statistics Tapestry 5 Application</name>
+    <name>flink-statistics  Application</name>
 	<properties>
         <java.version>1.8</java.version>
-        <tapestry-version>5.7.3</tapestry-version>
-        <tapestry-testify-version>1.0.4</tapestry-testify-version>
-        <tapestry-xpath-version>1.0.1</tapestry-xpath-version>
-        <jackson-version>2.9.6</jackson-version>
-        <geb-version>2.3.1</geb-version>
-        <htmlunit-driver-version>2.33.3</htmlunit-driver-version>
-        <json-version>1.1.2</json-version>
-        <selenium-version>3.141.59</selenium-version>
-        <servlet-api-version>3.0.1</servlet-api-version>
-        <spock-version>1.3-RC1-groovy-2.5</spock-version>
-        <spring-boot-version>2.1.3.RELEASE</spring-boot-version>
-        <yasson-version>1.0.1</yasson-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.compat.version>2.11</scala.compat.version>
         <hbase.version>1.2.0-cdh5.13.0</hbase.version>
@@ -32,184 +20,74 @@
 	</properties>
     <repositories>
         <repository>
-            <id>apache-staging</id>
-            <url>https://repository.apache.org/content/repositories/staging/</url>
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>jboss</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
         </repository>
     </repositories>
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.flink</groupId>-->
-<!--            <artifactId>flink-stream</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_${scala.compat.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
 
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <!-- Apache Tapestry -->
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-core</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <!-- CoffeeScript & Less support, plus resource minification -->
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-webresources</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <!-- Uncomment this to add support for hibernate, bean validation and file uploads -->
-        <!--
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-hibernate</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-beanvalidator</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-upload</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        -->
-        <!-- Unit Testing -->
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-test</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.testng</groupId>
-                    <artifactId>testng</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.tapestrytestify</groupId>
-            <artifactId>tapestry-testify</artifactId>
-            <version>${tapestry-testify-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.tapestryxpath</groupId>
-            <artifactId>tapestry-xpath</artifactId>
-            <version>${tapestry-xpath-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
-            <version>${spock-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-spring</artifactId>
-            <version>${spock-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Integration Testing -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.gebish</groupId>
-            <artifactId>geb-spock</artifactId>
-            <version>${geb-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-support</artifactId>
-            <version>${selenium-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
-            <version>${htmlunit-driver-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Miscellaneous -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>yasson</artifactId>
-            <version>${yasson-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.json</artifactId>
-            <version>${json-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-yaml</artifactId>
-            <version>${jackson-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet-api-version}</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.0</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>rec.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
