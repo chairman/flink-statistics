@@ -15,21 +15,13 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.compat.version>2.11</scala.compat.version>
-        <hbase.version>1.2.0-cdh5.13.0</hbase.version>
+        <hadoop.version>3.3.1</hadoop.version>
         <flink.version>1.6.1</flink.version>
 	</properties>
     <repositories>
         <repository>
-            <id>aliyun</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>jboss</id>
-            <url>http://repository.jboss.org/nexus/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>cloudera</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
+            <id>apache-staging</id>
+            <url>https://repository.apache.org/content/repositories/staging/</url>
         </repository>
     </repositories>
     <dependencies>
@@ -48,7 +40,7 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
-            <version>3.3.1</version>
+            <version>${hadoop.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -59,14 +51,8 @@
 
         <dependency>
             <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-common</artifactId>
-            <version>1.1.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>hbase-client</artifactId>
+            <version>2.3.0</version>
         </dependency>
 
         <dependency>
