@@ -9,6 +9,8 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.MD5Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class HbaseOperator {
     private static Logger LOG = LoggerFactory.getLogger(HbaseOperator.class);
@@ -20,6 +22,11 @@ public class HbaseOperator {
     private static String user_book_chapter_read =  "user_book_chapter_read";
     static {
         try {
+            InputStream in = HbaseOperator.class.getClassLoader().getResourceAsStream("hbase.properties");
+            Properties props = new Properties();
+            props.load(in);
+            hbaseZookeeperQuorum = props.getProperty("hbase.zookeeper.quorum").trim();
+            hbaseZookeeperPropertyClientPort = props.getProperty("hbase.zookeeper.property.clientPort").trim();
             pool = new Hbase(hbaseZookeeperQuorum,hbaseZookeeperPropertyClientPort);
             Runtime.getRuntime().addShutdownHook(new Thread((Runnable) ()->{pool.destory();}));
         }catch (Exception e){
@@ -103,4 +110,5 @@ public class HbaseOperator {
         }
         return 0;
     }
+
 }
